@@ -8411,7 +8411,7 @@ dependencies = [
  "tracing",
  "transform-stream",
  "url",
- "winapi",
+ "windows 0.62.2",
  "zstd",
 ]
 
