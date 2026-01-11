@@ -7690,6 +7690,7 @@ dependencies = [
 name = "rustfs"
 version = "0.0.5"
 dependencies = [
+ "aes-gcm 0.11.0-rc.2",
  "astral-tokio-tar",
  "async-trait",
  "atoi",
@@ -7724,6 +7725,7 @@ dependencies = [
  "moka",
  "pin-project-lite",
  "pprof",
+ "rand 0.10.0-rc.6",
  "reqwest",
  "rmp-serde",
  "russh",
