@@ -176,14 +176,12 @@ impl RustFSTestEnvironment {
     /// Kill any existing RustFS processes
     pub async fn cleanup_existing_processes(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         info!("Cleaning up any existing RustFS processes");
-        let binary_path = rustfs_binary_path();
-        let binary_name = binary_path.to_string_lossy();
-        let output = Command::new("pkill").args(["-f", &binary_name]).output();
+        let output = Command::new("pkill").args(["-f", "rustfs"]).output();
 
         if let Ok(output) = output
             && output.status.success()
         {
-            info!("Killed existing RustFS processes: {}", binary_name);
+            info!("Killed existing RustFS processes");
             sleep(Duration::from_millis(1000)).await;
         }
         Ok(())
@@ -364,13 +362,4 @@ pub async fn awscurl_put(
     secret_key: &str,
 ) -> Result<String, Box<dyn std::error::Error + Send + Sync>> {
     execute_awscurl(url, "PUT", Some(body), access_key, secret_key).await
-}
-
-/// Helper function for DELETE requests
-pub async fn awscurl_delete(
-    url: &str,
-    access_key: &str,
-    secret_key: &str,
-) -> Result<String, Box<dyn std::error::Error + Send + Sync>> {
-    execute_awscurl(url, "DELETE", None, access_key, secret_key).await
 }
